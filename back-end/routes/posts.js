@@ -1,0 +1,44 @@
+const express = require('express');
+const router = express.Router();
+const Post = require('../models/Post');
+const { authorizeRoles } = require('../middleware/auth'); 
+
+
+router.get('/', async (req, res) => {
+  try {
+    const posts = await Post.find().populate('author categories');
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.get('/:id', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id).populate('author categories');
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+    res.json(post);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.post('/', authorizeRoles(['admin']), async (req, res) => {
+  const post = new Post({
+    title: req.body.title,
+    content: req.body.content,
+    author: req.body.author,
+    categories: req.body.categories,
+  });
+
+  try {
+    const newPost = await post.save();
+    res.status(201).json(newPost);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+module.exports = router;
