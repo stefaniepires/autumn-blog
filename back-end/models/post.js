@@ -18,6 +18,16 @@ const PostSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category',
   }],
+  image: {
+    type: String,
+    required: false, 
+  },
+  status: {
+    type: String,
+    enum: ['Active', 'Draft', 'Delete'], 
+    default: 'Draft', 
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

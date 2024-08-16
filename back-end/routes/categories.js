@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Category = require('../models/Category');
-const { authorizeRoles } = require('../middleware/auth');
+const { authenticate, authorizeRoles } = require('../middleware/auth');
 
-// Public route: Get all categories
 router.get('/', async (req, res) => {
   try {
     const categories = await Category.find();
@@ -13,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Public route: Get a single category by ID
+
 router.get('/:id', async (req, res) => {
   try {
     const category = await Category.findById(req.params.id);
@@ -26,8 +25,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Admin-only route: Create a new category
-router.post('/', authorizeRoles(['admin']), async (req, res) => {
+router.post('/', authenticate, authorizeRoles(['admin']), async (req, res) => {
   const category = new Category({
     name: req.body.name,
     description: req.body.description,

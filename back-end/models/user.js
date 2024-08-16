@@ -20,10 +20,6 @@ const UserSchema = new mongoose.Schema({
     enum: ['admin', 'user'],
     default: 'user',
   },
-  adminProfile: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'AdminProfile',
-  },
 });
 
 UserSchema.pre('save', async function (next) {
@@ -32,11 +28,16 @@ UserSchema.pre('save', async function (next) {
   }
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
+  console.log('Hashed Password during save:', this.password);  // Add this for debugging
   next();
 });
 
 UserSchema.methods.matchPassword = async function (enteredPassword) {
+  console.log('Entered Password:', enteredPassword);  // Log the entered password
+  console.log('Stored Hashed Password:', this.password);  // Log the stored hashed password
   return await bcrypt.compare(enteredPassword, this.password);
+
+
 };
 
 module.exports = mongoose.model('User', UserSchema);

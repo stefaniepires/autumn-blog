@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
-const { authorizeRoles } = require('../middleware/auth'); 
+const { authorizeRoles, authenticate } = require('../middleware/auth'); 
 
 
 router.get('/', async (req, res) => {
@@ -25,12 +25,14 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', authorizeRoles(['admin']), async (req, res) => {
+router.post('/', authenticate, authorizeRoles(['admin']), async (req, res) => {
   const post = new Post({
     title: req.body.title,
     content: req.body.content,
     author: req.body.author,
     categories: req.body.categories,
+    image: req.body.image,
+    status: req.body.status
   });
 
   try {
