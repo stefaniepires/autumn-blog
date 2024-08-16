@@ -1,0 +1,52 @@
+@import "../../../styles.scss";
+
+.navbar-text {
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-family: "QuattrocentoSans", sans-serif;
+  font-size: 13px;
+  margin-left: 15px;
+}
+
+.input-group {
+  width: 200px;
+}
+
+.navbar {
+  background-color: $red;
+}
+
+.custom-icon {
+  color: #fff;
+}
+
+.input-group .form-control::placeholder {
+  color: #fff;
+  font-size: 12px;
+  font-style: italic;
+  text-align: right;
+  letter-spacing: 2px;
+}
+
+.input-group .form-control {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #fff;
+  font-family: "QuattrocentoSans", sans-serif;
+  box-shadow: none;
+  border-radius: 0;
+  color: #fff;
+}
+
+.input-group .fa-search {
+  color: #fff;
+  font-size: 12px;
+}
+
+.input-group a {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+}

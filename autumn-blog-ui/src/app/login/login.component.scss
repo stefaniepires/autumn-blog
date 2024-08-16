@@ -1,0 +1,23 @@
+@import "../../styles.scss";
+
+.spice {
+  color: $orangeGold;
+  font-family: "Whisper", cursive;
+}
+
+.navbar-text {
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-family: "QuattrocentoSans", sans-serif;
+  font-size: 14px;
+  margin-left: 15px;
+}
+
+.navbar {
+  background-color: $red;
+}
+
+.custom-icon {
+  color: #fff;
+}

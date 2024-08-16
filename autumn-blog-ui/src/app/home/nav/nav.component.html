@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-text" [routerLink]="['/login']" >login</a>
+    <a class="navbar-text" [routerLink]="['/register']">signup</a>
+
+    <div class="d-flex ms-auto align-items-center">
+      <a href="#" class="me-3">
+        <i class="fab fa-facebook custom-icon"></i>
+      </a>
+      <a href="#" class="me-3">
+        <i class="fab fa-twitter custom-icon"></i>
+      </a>
+      <a href="#" class="me-3">
+        <i class="fab fa-instagram custom-icon"></i>
+      </a>
+      <a href="#" class="me-3">
+        <i class="fab fa-tiktok custom-icon"></i>
+      </a>
+
+      <form class="d-flex">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="search here" aria-label="Search" aria-describedby="search-icon">
+          <a href="#" id="search-icon">
+            <i class="fas fa-search"></i>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>

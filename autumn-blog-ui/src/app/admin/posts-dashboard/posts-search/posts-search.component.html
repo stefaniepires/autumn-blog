@@ -1,0 +1,34 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+  <div class="search-form-container mb-3 mt-3">
+
+    <mat-form-field class="search-field" appearance="fill">
+      <input matInput formControlName="title" placeholder="Title">
+    </mat-form-field>
+
+    <mat-form-field class="search-field" appearance="fill">
+      <input matInput type="date" formControlName="createdDate">
+    </mat-form-field>
+
+    <mat-form-field class="search-field" appearance="fill">
+      <input matInput type="date" formControlName="updatedDate">
+    </mat-form-field>
+
+    <mat-form-field class="search-field" appearance="fill">
+      <mat-select formControlName="status">
+        <mat-option value="">All</mat-option>
+        <mat-option value="Active">Active</mat-option>
+        <mat-option value="Draft">Draft</mat-option>
+        <mat-option value="Delete">Delete</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="search-field" appearance="fill">
+      <input matInput formControlName="category" placeholder="Search by Category">
+    </mat-form-field>
+
+    <div class="button-group">
+      <button mat-flat-button color="primary" type="submit">Search</button>
+      <button mat-stroked-button type="button" (click)="onReset()">Reset</button>
+    </div>
+  </div>
+</form>

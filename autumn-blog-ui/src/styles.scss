@@ -1,1 +1,78 @@
-/* You can add global styles to this file, and also import other style files */
+// Reds
+$red: #8b2a1c;
+$burntRed: #aa4a33;
+
+// Beige/Neutrals
+$beige: #c89d6c;
+$ltBeige: #d7b180;
+$lterBeige: #e3c7a8;
+$pinkBeige: #fedfd2;
+$dkPinkBeige: #ffb6af;
+$navbar: #e5d2c3;
+
+// Orange/Gold
+$orangeGold: #f9b238;
+$ltGold: #fbc97a;
+$ltOrange: #f8995e;
+$dkOrange: #f05a23;
+
+// Black
+$black: #141414;
+
+@font-face {
+  font-family: "Whisper";
+  src: url("../src/assets/fonts/Whisper/Whisper-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "VolkornSC";
+  src: url("../src/assets/fonts/Vollkorn_SC/VollkornSC-Regular.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "QuattrocentoSans";
+  src: url("../src/assets/fonts/Quattrocento_Sans/QuattrocentoSans-Regular.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  h1 {
+    color: $black;
+    font-family: "VolkornSC", serif;
+  }
+
+  h2 {
+    color: $black;
+    font-family: "VolkornSC", serif;
+  }
+
+  h3 {
+    color: $orangeGold;
+    font-family: "QuattrocentoSans", sans-serif;
+  }
+
+  h4 {
+    color: $black;
+  }
+
+  h5 {
+    color: $black;
+    font-family: "QuattrocentoSans", sans-serif;
+  }
+
+  h6 {
+    color: $black;
+  }
+
+  button {
+    background-color: $orangeGold !important;
+    color: $black;
+  }
+}
