@@ -7,8 +7,22 @@ const Category = require('../models/Category');
 
 router.get('/', async (req, res) => {
   try {
-    const { featured } = req.query;
-    const filter = featured ? { featured: true } : {};
+    const { featured, category } = req.query;
+    let filter = {};
+
+    if (featured) {
+      filter.featured = true;
+    }
+    if (category) {
+
+      const categoryDoc = await Category.findOne({ name: category });
+
+      if (categoryDoc) {
+        filter.categories = categoryDoc._id; 
+      } else {
+        return res.status(404).json({ message: 'Category not found' });
+      }
+    }
 
     const posts = await Post.find(filter).populate('author categories');
     res.json(posts);
@@ -29,6 +43,8 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+
 
 
 router.post('/', authenticate, authorizeRoles(['admin']), async (req, res) => {

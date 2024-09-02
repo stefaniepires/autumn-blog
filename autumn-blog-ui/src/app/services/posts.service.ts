@@ -27,6 +27,10 @@ export class PostsService {
     );
   }
 
+  getPostsByCategory(category: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}?category=${encodeURIComponent(category)}`);
+  }
+
   createPost(postData: any): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http.post(this.apiUrl, postData, { headers }).pipe(

@@ -5,25 +5,58 @@
       Be the first to know about cozy content, seasonal tips, and exclusive autumn
       surprises. Sign up and let the fall vibes come straight to your inbox!
     </p>
-    <form class="row justify-content-center gx-2">
-      <div class="col-lg-4 col-md-12 mb-2 mb-md-0">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Your Name"
-          required
-        />
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="row justify-content-center gx-1 newsletter-form">
+      <div class="col-md-5 col-sm-12">
+        <mat-form-field class="form-control-no-border">
+          <input
+            matInput
+            type="text"
+            placeholder="Your Name"
+            formControlName="name"
+            class="form-control"
+            required
+          />
+          @if(signupForm.get('name')?.hasError('required') && signupForm.get('name')?.touched) {
+            <mat-error>
+              Name is required
+            </mat-error>
+          }
+        </mat-form-field>
       </div>
-      <div class="col-lg-4 col-md-12 mb-2 mb-md-0">
-        <input
-          type="email"
-          class="form-control"
-          placeholder="Your Email"
-          required
-        />
+      <div class="col-md-5 col-sm-12">
+        <mat-form-field class="form-control-no-border">
+          <input
+            matInput
+            type="email"
+            placeholder="Your Email"
+            formControlName="email"
+            class="form-control"
+            required
+          />
+          @if(signupForm.get('email')?.hasError('required') && signupForm.get('email')?.touched){
+            <mat-error>
+              Email is required
+            </mat-error>
+          }
+          @if(signupForm.get('email')?.hasError('email') && signupForm.get('email')?.touched){
+            <mat-error>
+              Enter a valid email address
+            </mat-error>
+          }
+        </mat-form-field>
       </div>
-      <div class="col-lg-4 col-md-12">
-        <button type="submit" class="btn btn-primary w-100">Subscribe</button>
+
+      <div class="col-12 ">
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="isSubmitting || signupForm.invalid"
+        >
+          Subscribe
+        </button>
       </div>
     </form>
   </div>

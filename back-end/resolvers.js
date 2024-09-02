@@ -2,6 +2,7 @@ const Post = require('./models/Post');
 const User = require('./models/User');
 const Category = require('./models/Category');
 const Comment = require('./models/Comment');
+const Subscriber = require('./models/Subscriber'); 
 
 const resolvers = {
   Query: {
@@ -13,6 +14,7 @@ const resolvers = {
     getCategory: (_, { id }) => Category.findById(id),
     getComments: (_, { postId }) => Comment.find({ post: postId }).populate('author'),
     getComment: (_, { id }) => Comment.findById(id).populate('author post'),
+    getSubscribers: () => Subscriber.find(), 
   },
   Mutation: {
     createPost: (_, { title, content, author, categories, featured }) => {
@@ -31,6 +33,17 @@ const resolvers = {
     createComment: (_, { content, author, post }) => {
       const comment = new Comment({ content, author, post });
       return comment.save();
+    },
+    subscribe: async (_, { name, email }) => {
+
+      const existingSubscriber = await Subscriber.findOne({ email });
+      if (existingSubscriber) {
+        throw new Error('This email is already subscribed.');
+      }
+      
+      const subscriber = new Subscriber({ name, email });
+      await subscriber.save();
+      return subscriber;
     },
   },
 };

@@ -3,7 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { ApolloServer } = require('apollo-server-express');
-const { authenticate, authorizeRoles } = require('./middleware/auth');
 const typeDefs = require('./schema');  
 const resolvers = require('./resolvers');  
 
@@ -30,6 +29,7 @@ async function startServer() {
   app.use('/admin/profile', require('./routes/admin-profile'));
   app.use('/auth', require('./routes/auth'));
   app.use('/users', require('./routes/users'));
+  app.use('/subscribers', require('./routes/subscriber'));
 
 
   const PORT = process.env.PORT;

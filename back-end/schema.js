@@ -30,6 +30,13 @@ const typeDefs = gql`
     post: Post!
   }
 
+  type Subscriber {
+    id: ID!
+    name: String!
+    email: String!
+    createdAt: String!
+  }
+
   type Query {
     getPosts: [Post!]!
     getPost(id: ID!): Post
@@ -39,6 +46,7 @@ const typeDefs = gql`
     getCategory(id: ID!): Category
     getComments(postId: ID!): [Comment!]!
     getComment(id: ID!): Comment
+    getSubscribers: [Subscriber!]!
   }
 
   type Mutation {
@@ -46,6 +54,7 @@ const typeDefs = gql`
     createUser(name: String!, email: String!, password: String!, role: String): User!
     createCategory(name: String!, description: String): Category!
     createComment(content: String!, author: ID!, post: ID!): Comment!
+    subscribe(name: String!, email: String!): Subscriber!
   }
 `;
 

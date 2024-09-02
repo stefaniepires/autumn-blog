@@ -52,7 +52,7 @@ export class AuthService {
       const payload = JSON.parse(atob(token.split('.')[1]));
       const expiry = payload.exp * 1000;
       if (Date.now() >= expiry) {
-        this.toastr.error('Your session has expired. Please log in again.', 'Session Expired');
+        alert('Your session has expired. Please log in again.');
         this.router.navigate(['/login']);
         return null;
       }
@@ -60,7 +60,6 @@ export class AuthService {
     }
     return null;
   }
-
 
   isLoggedIn(): boolean {
     const token = localStorage.getItem('token') || localStorage.getItem('adminToken');

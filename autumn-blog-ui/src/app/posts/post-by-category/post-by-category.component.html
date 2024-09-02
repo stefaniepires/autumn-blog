@@ -1,0 +1,26 @@
+<div class="container">
+  <h1 class="text-center">{{category()}}</h1>
+  <hr>
+  @for(post of posts(); track post.title) {
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-12">
+        <div class="blog-post text-center">
+          <img [src]="post.image" class="img-fluid" alt="Blog Post Image" style="height: 300px; object-fit: cover; width: 100%;">
+          <div class="blog-content mt-3">
+            <small class="text-muted">{{ post.createdAt | date:'MM-dd-yyyy' }}</small><br>
+            <h2 class="post-title">{{post.title}}</h2>
+            @for (category of post.categories; track category) {
+              <span class="badge bg-primary">{{ category.name }}</span>
+            }
+            <div class="post-snippet">
+              {{ post.content | truncate:300 }}
+            </div>
+            <a [routerLink]="['/post', post._id]" class="btn red-button mt-3">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

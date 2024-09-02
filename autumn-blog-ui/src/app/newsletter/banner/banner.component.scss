@@ -2,3 +2,43 @@
   max-width: 1600px;
   margin: 20px auto;
 }
+
+.newsletter-signup {
+  .newsletter-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .form-control-no-border {
+    width: 100%;
+    margin-bottom: 0;
+
+    // Remove the outline for a cleaner look
+    mat-form-field-appearance-standard {
+      mat-form-field-wrapper {
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      mat-form-field-underline {
+        display: none;
+      }
+    }
+
+    .mat-input-element {
+      border: none;
+      box-shadow: none;
+    }
+
+    // Adjust spacing between form fields
+    .mat-form-field {
+      margin: 0;
+    }
+  }
+
+  .btn-primary {
+    border-radius: 4px; // Make button rectangular, not pill-shaped
+    margin-top: 0;
+  }
+}
