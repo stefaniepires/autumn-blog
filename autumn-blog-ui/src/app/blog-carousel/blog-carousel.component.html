@@ -1,18 +1,38 @@
-<div class="container mt-5">
-  <div class="row">
-    @for(post of blogPosts; track post.title){
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <img [src]="post.image" class="card-img-top" alt="{{ post.title }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5>
-            <p class="card-text">
-              <small class="text-muted">{{ post.date }}</small><br>
-              <span class="badge bg-primary" *ngFor="let category of post.categories">{{ category }}</span>
-            </p>
+<div id="blogCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2000">
+  <div class="carousel-inner">
+    @for (slide of carouselSlides; track slide[0]?.title) {
+      <div class="carousel-item" [class.active]="carouselSlides.indexOf(slide) === 0">
+        <div class="container mt-5">
+          <div class="row">
+            @for (post of slide; track post.title) {
+              <div class="col-md-4">
+                <div class="card mb-4">
+                  <img [src]="post.image" class="card-img-top" alt="{{ post.title }}">
+                  <div class="card-body">
+                    <a [routerLink]="['/post', post._id]" class="text-decoration-none text-dark">
+                      <h5 class="card-title m-0">{{ post.title }}</h5>
+                    </a>
+                    <p class="card-text">
+                      <small class="text-muted">{{ post.createdAt | date:'MM-dd-yyyy' }}</small><br>
+                      @for (category of post.categories; track category) {
+                        <span class="badge bg-primary">{{ category.name }}</span>
+                      }
+                    </p>
+                  </div>
+                </div>
+              </div>
+            }
           </div>
         </div>
       </div>
+    }
+  </div>
+  <div class="carousel-indicators custom-indicators">
+    @for (slides of carouselSlides; track slides) {
+      <button type="button" data-bs-target="#blogCarousel"
+              [attr.data-bs-slide-to]="slides"
+              [class.active]="slides">
+      </button>
     }
   </div>
 </div>

@@ -28,6 +28,10 @@ const PostSchema = new mongoose.Schema({
     default: 'Draft', 
     required: true,
   },
+  featured: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

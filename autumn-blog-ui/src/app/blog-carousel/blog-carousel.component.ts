@@ -1,32 +1,40 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PostsService } from '../services/posts.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-blog-carousel',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './blog-carousel.component.html',
   styleUrl: './blog-carousel.component.scss'
 })
 export class BlogCarouselComponent {
-  blogPosts = [
-    {
-      title: 'Pumpkin Spice Delights',
-      date: '08-16-2022',
-      categories: ['Recipes', 'Fall'],
-      image: '../../assets/test/latte.png'
-    },
-    {
-      title: 'Autumn Adventures',
-      date: '08-15-2022',
-      categories: ['Travel'],
-      image: 'assets/test/adventure.png'
-    },
-    {
-      title: 'Cozy Fall Reads',
-      date: '08-14-2022',
-      categories: ['Books', 'Fall'],
-      image: 'assets/test/fashion.png'
+  blogPosts: any[] = [];
+  carouselSlides: any[][] = [];
+
+  constructor(private postsService: PostsService) {}
+
+  ngOnInit(): void {
+    this.loadAllPosts();
+  }
+
+  loadAllPosts(): void {
+    this.postsService.get().subscribe({
+      next: (data) => {
+        this.blogPosts = data;
+        this.createCarouselSlides();
+      },
+      error: (err) => console.error('Error fetching posts:', err)
+    });
+  }
+
+  createCarouselSlides(): void {
+    const slides: any[][] = [];
+    for (let i = 0; i < this.blogPosts.length - 2; i++) {
+      slides.push(this.blogPosts.slice(i, i + 3));
     }
-  ];
+    this.carouselSlides = slides;
+  }
 }

@@ -1,7 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
-    <a class="navbar-text" [routerLink]="['/login']" >login</a>
-    <a class="navbar-text" [routerLink]="['/register']">signup</a>
+    <a class="navbar-text" [routerLink]="isAdminLoggedIn() ? '/dashboard' : '/login'">
+      {{ isAdminLoggedIn() ? 'Dashboard' : 'Login' }}
+    </a>
+    @if (!isAdminLoggedIn()) {
+      <a class="navbar-text" [routerLink]="['/register']">Sign Up</a>
+    }
 
     <div class="d-flex ms-auto align-items-center">
       <a href="#" class="me-3">
@@ -19,7 +23,7 @@
 
       <form class="d-flex">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="search here" aria-label="Search" aria-describedby="search-icon">
+          <input type="text" class="form-control" placeholder="Search here" aria-label="Search" aria-describedby="search-icon">
           <a href="#" id="search-icon">
             <i class="fas fa-search"></i>
           </a>

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,26 @@ import { Router } from '@angular/router';
 export class AuthService {
   private apiUrl = 'http://localhost:5001/auth/';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) {}
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { email, password });
+    return this.http.post(`${this.apiUrl}/login`, { email, password }).pipe(
+      tap((response: any) => {
+        if (response && response.token) {
+          const token = response.token;
+
+          const decodedToken = this.decodeToken(token);
+
+          if (decodedToken && decodedToken.role === 'admin') {
+            localStorage.setItem('adminToken', token);
+          } else {
+            localStorage.setItem('token', token);
+          }
+        } else {
+          console.error('Invalid login response:', response);
+        }
+      })
+    );
   }
 
   register(name: string, email: string, password: string, role: string): Observable<any> {
@@ -20,32 +37,43 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token'); // Remove the token from local storage
-    this.router.navigate(['/login']); // Redirect to the login page
+    localStorage.removeItem('token');
+    localStorage.removeItem('adminToken');
+    this.router.navigate(['/login']);
   }
 
   forgotPassword(email: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/forgot-password`, { email });
   }
 
-  // signUpWithGoogle(token: string): Observable<any> {
-  //   return this.http.post(`${this.apiUrl}/google-signup`, { token });
-  // }
-
   getCurrentUser(): any {
-    if (typeof localStorage !== 'undefined') {
-      const token = localStorage.getItem('token');
-      if (token) {
-        const payload = atob(token.split('.')[1]);
-        return JSON.parse(payload);
+    const token = localStorage.getItem('token');
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expiry = payload.exp * 1000;
+      if (Date.now() >= expiry) {
+        this.toastr.error('Your session has expired. Please log in again.', 'Session Expired');
+        this.router.navigate(['/login']);
+        return null;
       }
+      return payload;
     }
     return null;
   }
 
 
   isLoggedIn(): boolean {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || localStorage.getItem('adminToken');
     return !!token;
+  }
+
+  private decodeToken(token: string): any {
+    try {
+      const payload = atob(token.split('.')[1]);
+      return JSON.parse(payload);
+    } catch (e) {
+      console.error('Error decoding token:', e);
+      return null;
+    }
   }
 }

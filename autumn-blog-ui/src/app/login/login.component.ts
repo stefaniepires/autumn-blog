@@ -17,7 +17,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router  // Inject Router
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -30,12 +30,12 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe(
         (response) => {
-          localStorage.setItem('token', response.token);  // Store the JWT token in localStorage
-          this.router.navigate(['/dashboard']);  // Navigate to the dashboard
+          // localStorage.setItem('token', response.token);
+          this.router.navigate(['/dashboard']);
         },
         (error) => {
           console.error('Login failed:', error);
-          alert('Login failed. Please check your credentials.');  // Popup for testing
+          alert('Login failed. Please check your credentials.');
         }
       );
     }

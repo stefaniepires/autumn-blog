@@ -13,7 +13,10 @@ import { MatRadioModule } from '@angular/material/radio';
 @Component({
   selector: 'app-posts-search',
   standalone: true,
-  imports: [ReactiveFormsModule,  MatRadioModule, FormsModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatButtonModule, MatLabel,
+  imports: [ReactiveFormsModule,  MatRadioModule, FormsModule, MatFormFieldModule, MatOptionModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatLabel,
     MatCardModule,
     MatInputModule,
     MatSortModule,
@@ -29,11 +32,15 @@ export class PostsSearchComponent {
   constructor(private fb: FormBuilder) {
     this.searchForm = this.fb.group({
       title: [''],
-      createdDate: [''],
-      updatedDate: [''],
+      createdStartDate: [''],
+      createdEndDate: [''],
+      updatedStartDate: [''],
+      updatedEndDate: [''],
       status: [''],
-      category: ['']
+      category: [''],
+      featured:['']
     });
+
   }
 
   onSearch(): void {

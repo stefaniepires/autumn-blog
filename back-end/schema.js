@@ -7,6 +7,7 @@ const typeDefs = gql`
     content: String!
     author: User!
     categories: [Category!]!
+    featured: Boolean
   }
 
   type User {
@@ -41,7 +42,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createPost(title: String!, content: String!, author: ID!, categories: [ID!]!): Post!
+    createPost(title: String!, content: String!, author: ID!, categories: [ID!]!, featured: Boolean): Post!
     createUser(name: String!, email: String!, password: String!, role: String): User!
     createCategory(name: String!, description: String): Category!
     createComment(content: String!, author: ID!, post: ID!): Comment!

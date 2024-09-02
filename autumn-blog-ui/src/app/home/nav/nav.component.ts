@@ -18,4 +18,13 @@ export class NavComponent {
       searchInput.focus();
     }
   }
+  isAdminLoggedIn(): boolean {
+    if (typeof localStorage !== 'undefined') {
+      const token = localStorage.getItem('adminToken');
+      return !!token;
+    }
+    return false;
+  }
+
+
 }

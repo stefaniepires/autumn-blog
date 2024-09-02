@@ -1,6 +1,5 @@
 <app-nav></app-nav>
 
-<!-- Logo centered below the navbar -->
 <div class="logo-container">
   <h1>Pumpkin <span class="spice">Spice</span> Season</h1>
 </div>
@@ -9,7 +8,6 @@
   <p>Your Go-To Guide for Autumn Inspirations</p>
 </div>
 
-<!-- Links centered below the logo with some space -->
 <div class="links-container">
   <a href="#" class="nav-link">Home</a>
   <a href="#" class="nav-link">About</a>
@@ -20,3 +18,20 @@
   <a href="#" class="nav-link">Contact</a>
 </div>
 <app-blog-carousel></app-blog-carousel>
+<app-banner></app-banner>
+
+<div class="container my-4">
+  <div class="row">
+    <div class="col-lg-4 col-md-5 order-1 order-md-2">
+      <div class="right-column-content">
+      <app-side-blog-content></app-side-blog-content>
+      </div>
+    </div>
+
+    <div class="col-lg-8 col-md-7 order-2 order-md-1">
+      <app-home-page-posts></app-home-page-posts>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,16 +1,72 @@
-<form [formGroup]="postForm" >
-  <div >
-    Add a new supervisor
-    <!-- <to-dialog-close /> -->
-  </div>
+<app-admin-nav></app-admin-nav>
+<div class="form-container">
+  <mat-card class="blog-post-form">
+    <mat-card-title class="mb-2">{{ post ? 'Edit Blog Post' : 'Add New Blog Post' }}</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" placeholder="Enter the post title" />
+          @if(postForm.get('title')?.hasError('required')){
+            <mat-error>Title is required</mat-error>
+          }
+        </mat-form-field>
 
-    <div class="row">
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Image URL</mat-label>
+          <input matInput formControlName="image" placeholder="Enter the image URL" />
+        </mat-form-field>
 
-    </div>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option value="Active">Active</mat-option>
+            <mat-option value="Draft">Draft</mat-option>
+            <mat-option value="Delete">Delete</mat-option>
+          </mat-select>
+          @if(postForm.get('status')?.hasError('required')){
+            <mat-error>Status is required</mat-error>
+          }
+        </mat-form-field>
 
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Categories</mat-label>
+          <mat-select formControlName="categories" multiple>
+            @for(category of categories; track category) {
+              <mat-option [value]="category.name">
+                {{ category.name }}
+              </mat-option>
+            }
+          </mat-select>
+          @if(postForm.get('categories')?.hasError('required')){
+            <mat-error>At least one category is required</mat-error>
+          }
+        </mat-form-field>
 
-    <!-- <button color="warn" type="button" mat-stroked-button (click)="submit(true)">Delete</button>
-    <button color="primary" type="button" mat-stroked-button mat-dialog-close>Cancel</button>
-    <button color="primary" type="submit" mat-flat-button [toSaveButton]="saving()">Submit</button> -->
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Content</mat-label>
+          <textarea matInput formControlName="content" placeholder="Enter the post content"></textarea>
+          @if(postForm.get('content')?.hasError('required')){
+            <mat-error>Content is required</mat-error>
+          }
+        </mat-form-field>
 
-</form>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Featured</mat-label>
+          <mat-select formControlName="featured">
+            <mat-option [value]="true">Yes</mat-option>
+            <mat-option [value]="false">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="button-group">
+          <button mat-flat-button color="primary" type="submit">{{ post ? 'Update Post' : 'Create Post' }}</button>
+          <button mat-stroked-button type="button" (click)="onCancel()">Cancel</button>
+          @if(post){
+            <button mat-flat-button color="warn" type="button" (click)="onSoftDelete()">Delete</button>
+          }
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

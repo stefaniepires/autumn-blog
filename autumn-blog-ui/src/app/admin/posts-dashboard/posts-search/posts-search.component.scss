@@ -1,18 +1,19 @@
 .search-form-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem; /* Adjusts spacing between form fields */
-  padding: 1rem; /* Adds padding around the entire form container */
+  gap: 1rem;
+  padding: 1rem;
 
-  // .search-field {
-  //   flex: 1 1 200px; /* Ensures each field takes up space but is not too narrow */
-  //   min-width: 220px; /* Sets a minimum width for each input field */
-  // }
+  .search-field {
+    flex: 1 1 calc(33.33% - 1rem); /* 3 fields per row with gap */
+    min-width: 220px;
+  }
 
   .button-group {
     display: flex;
-    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 1rem;
     gap: 1rem;
-    margin-top: 1.5rem; /* Adjusts margin to ensure buttons are well-aligned */
   }
 }

@@ -15,8 +15,8 @@ const resolvers = {
     getComment: (_, { id }) => Comment.findById(id).populate('author post'),
   },
   Mutation: {
-    createPost: (_, { title, content, author, categories }) => {
-      const post = new Post({ title, content, author, categories });
+    createPost: (_, { title, content, author, categories, featured }) => {
+      const post = new Post({ title, content, author, categories, featured });
       return post.save();
     },
     createUser: async (_, { name, email, password, role }) => {
