@@ -14,17 +14,17 @@ const authenticate = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     console.log('Decoded Token:', decoded);
-    req.auth = decoded;
+    req.user = decoded; 
     next();
-} catch (err) {
+  } catch (err) {
     console.error('JWT Verification Error:', err.message);
     return res.status(401).json({ message: 'Token is not valid' });
-}
+  }
 };
 
 const authorizeRoles = (roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.auth.role)) {
+    if (!req.user || !roles.includes(req.user.role)) { 
       return res.status(403).json({ message: 'Access denied: You do not have the required role.' });
     }
     next();

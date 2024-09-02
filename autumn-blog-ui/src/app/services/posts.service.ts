@@ -32,32 +32,30 @@ export class PostsService {
   }
 
   createPost(postData: any): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.post(this.apiUrl, postData, { headers }).pipe(
+    return this.http.post(this.apiUrl, postData).pipe(
       catchError(this.handleError)
     );
   }
 
   updatePost(id: string, postData: any): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.put(`${this.apiUrl}${id}`, postData, { headers }).pipe(
+    return this.http.put(`${this.apiUrl}${id}`, postData).pipe(
       catchError(this.handleError)
     );
   }
 
 
-  private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
-    if (!token) {
-      console.error('No token found');
-      return new HttpHeaders();
-    }
-    console.log('Retrieved token:', token);
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    });
-  }
+  // private getAuthHeaders(): HttpHeaders {
+  //   const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
+  //   if (!token) {
+  //     console.error('No token found');
+  //     return new HttpHeaders();
+  //   }
+  //   console.log('Retrieved token:', token);
+  //   return new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${token}`
+  //   });
+  // }
 
   private handleError(error: any): Observable<never> {
     console.error('An error occurred:', error);

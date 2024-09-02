@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Category = require('../models/Category');
+const Category = require('../models/category');
 const { authenticate, authorizeRoles } = require('../middleware/auth');
 
 router.get('/', async (req, res) => {

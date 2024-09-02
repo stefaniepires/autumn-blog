@@ -7,7 +7,6 @@ import {routes} from './app/app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { provideToToastr } from '../src/app/shared/toastr';
 
 
 bootstrapApplication(AppComponent, appConfig)
@@ -19,7 +18,6 @@ bootstrapApplication(AppComponent, appConfig)
       provideRouter(routes, withHashLocation()),
       provideAnimations(),
       provideHttpClient(),
-      provideToToastr(),
       provideNativeDateAdapter(),
     ],
   }).catch(console.error);

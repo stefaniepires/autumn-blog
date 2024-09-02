@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/Post');
+const Post = require('../models/post');
 const { authorizeRoles, authenticate } = require('../middleware/auth'); 
-const Category = require('../models/Category');
+const Category = require('../models/category');
 
 
 router.get('/', async (req, res) => {
@@ -49,23 +49,24 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', authenticate, authorizeRoles(['admin']), async (req, res) => {
   try {
-    if (!req.user || !req.user._id) {
+    if (!req.user || !req.user.id) {
       throw new Error('User not authenticated');
     }
 
     const post = new Post({
       title: req.body.title,
       content: req.body.content,
-      author: req.user._id, 
+      author: req.user.id, 
       categories: req.body.categories || [],
       image: req.body.image,
       status: req.body.status,
-      featured: req.body.featured || false, 
+      featured: req.body.featured || false,
     });
 
     const newPost = await post.save();
     res.status(201).json(newPost);
   } catch (err) {
+    console.error(`Error creating post: ${err.message}`);
     res.status(400).json({ message: err.message });
   }
 });

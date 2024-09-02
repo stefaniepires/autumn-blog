@@ -27,17 +27,7 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.authService.login(email, password).subscribe(
-        (response) => {
-          // localStorage.setItem('token', response.token);
           this.router.navigate(['/dashboard']);
-        },
-        (error) => {
-          console.error('Login failed:', error);
-          alert('Login failed. Please check your credentials.');
-        }
-      );
     }
   }
 }

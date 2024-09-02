@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AuthService {
   private apiUrl = 'http://localhost:5001/auth/';
 
-  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { email, password }).pipe(
@@ -20,11 +20,6 @@ export class AuthService {
 
           const decodedToken = this.decodeToken(token);
 
-          if (decodedToken && decodedToken.role === 'admin') {
-            localStorage.setItem('adminToken', token);
-          } else {
-            localStorage.setItem('token', token);
-          }
         } else {
           console.error('Invalid login response:', response);
         }
@@ -37,8 +32,6 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('adminToken');
     this.router.navigate(['/login']);
   }
 
@@ -59,11 +52,6 @@ export class AuthService {
       return payload;
     }
     return null;
-  }
-
-  isLoggedIn(): boolean {
-    const token = localStorage.getItem('token') || localStorage.getItem('adminToken');
-    return !!token;
   }
 
   private decodeToken(token: string): any {

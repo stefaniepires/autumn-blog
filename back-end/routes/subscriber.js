@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Subscriber = require('../models/Subscriber');
+const Subscriber = require('../models/subscriber');
 
 
 router.post('/signup', async (req, res) => {

@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "default": "stef-psl-blog"
+  },
+  "targets": {
+    "stef-psl-blog": {
+      "hosting": {
+        "autumn-blog-ui": [
+          "stef-psl-blog"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

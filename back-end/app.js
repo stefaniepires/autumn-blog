@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const { ApolloServer } = require('apollo-server-express');
 const typeDefs = require('./schema');  
 const resolvers = require('./resolvers');  
+const bcrypt = require('bcryptjs');
 
 const app = express();
 const cors = require('cors');
@@ -22,6 +23,9 @@ async function startServer() {
   await server.start();  
   server.applyMiddleware({ app });
 
+  app.get('/', (req, res) => {
+    res.send('Welcome to PSL Season Blog!'); 
+  });
 
   app.use('/posts', require('./routes/posts'));
   app.use('/comments', require('./routes/comments'));
