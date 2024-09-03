@@ -19,7 +19,7 @@ This blog is built using a combination of modern web technologies to provide a s
 
 ## Screenshot
 
-![Pumpkin Spice Season Blog Screenshot](https://i.imgur.com/9ZAYA63.gif)
+![Screenshot](https://i.imgur.com/tZSr2Ew.png)
 
 ## Website Link
 
@@ -37,6 +37,7 @@ To get a local copy up and running, follow these simple steps:
 ### Installation
 
 1. **Clone the repository:**
+
    `git clone https://github.com/stefaniepires/autumn-blog`
 
 2. **Navigate to the project directory**
