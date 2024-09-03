@@ -58,6 +58,27 @@ To get a local copy up and running, follow these simple steps:
 Visit `http://localhost:4200` to view the blog in your browser.  
 Browse through various categories, read posts, and enjoy the fall vibes!
 
+## Future Development
+
+### In V.2 of the app, planned features include:
+
+- **Admin Dashboard**: Launching a comprehensive dashboard for admins to manage content, users, and analytics effectively.
+- **Contact Page**: Adding a dedicated contact page to improve communication with users.
+- **Search Functionality**: Implementing search functionality to allow users to easily find specific content on the blog.
+- **Instagram Feed Integration**: Integrating an Instagram feed to showcase the latest autumn-themed posts directly on the blog.
+- **Security Updates and Improvements**: Enhancing security measures to ensure the safety and privacy of user data.
+
+### In V.3 of the app, exciting new features will be introduced:
+
+- **User Profiles**: Allowing users to create and personalize their profiles, including profile pictures, bios, and social media links.
+- **Commenting on Posts**: Enabling users to engage with content by adding comments to blog posts, fostering a more interactive community experience.
+- **Content Bookmarking**: Giving users the ability to bookmark their favorite posts for easy access in the future.
+- **User Notifications**: Implementing a notification system to alert users about new comments on their posts, replies to their comments, and other relevant updates.
+- **Enhanced Social Sharing**: Adding more social media sharing options to make it easier for users to share content across different platforms.
+- **Customizable Reading Lists**: Allowing users to create and manage personalized reading lists based on their interests.
+
+Stay tuned for these updates as we continue to enhance the Pumpkin Spice Season Blog!
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request or open an issue for any improvements or bugs.
