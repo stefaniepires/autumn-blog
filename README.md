@@ -19,7 +19,7 @@ This blog is built using a combination of modern web technologies to provide a s
 
 ## Screenshot
 
-![Screenshot](https://i.imgur.com/9ZAYA63.gif)
+![Walkthrough](./walkthrough.gif)
 
 ## Website Link
 
